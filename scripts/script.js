@@ -1,36 +1,6 @@
-// const obj = {
-//     firstName: 'Liubov',
-//     surname: 'Volkova',
-//     walk: function (steps) {
-//         console.log(this.firstName)
-//     }
-// };
-
-// const User = function (param) {
-//     this.firstName = param.firstName
-//     this.surname = param.surname
-//     this.walk = function (steps) {
-//         console.log(this.firstName)
-//     }
-// }
-// // extention
-// User.prototype.codding = function (time) {
-//     console.log(`${this.surname} has written the code for ${time} hours`)
-// }
-
-// const dmitry = new User({
-//     firstName: 'Dmitry',
-//     surname: 'Volkov'
-// });
-
-// dmitry.walk();
-// dmitry.codding();
-
 class Twitter {
-    constructor() {
-        this.tweets = new Posts({
-            posts: []
-        });
+    constructor({ listElem }) {
+        this.tweets = new Posts();
         this.elements = {
             listElem: document.querySelector(listElem)
         }
@@ -58,14 +28,12 @@ class Twitter {
 }
 
 class Posts {
-    constructor(param) {
-        const { posts } = param;
+    constructor({ posts = [] } = {}) {
         this.posts = posts;
     }
 
     addPost(tweet) {
-        const post = new Post(tweet);
-        this.posts.push(post);
+        this.posts.push(new Post(tweet));
     }
 
     deletePost(id) {
@@ -99,6 +67,9 @@ class Post {
     }
 }
 
-new Twitter({
-    listElem: '.tweet-elem'
+const twitter = new Twitter({
+    listElem: '.tweet-list'
 });
+
+
+console.log(twitter);
